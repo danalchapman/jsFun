@@ -18,14 +18,27 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames() {
+  orangePetNames(kittyData) {
     // Return an array of just the names of kitties who are orange e.g.
         // ['Tiger', 'Snickers']
 
-        /* CODE GOES HERE */
+    const orangeKitties = kittyData.filter((cat) => {
+      return cat.color === 'orange';
+    });
+
+    const orangeKittyNames = orangeKitties.map((cat) => {
+      return cat.name;
+    });
+
+    return orangeKittyNames;
 
     // Annotation:
     // Write your annotation here as a comment
+    // --pseudo:
+    // ---search for only the orange cats (filter)
+      // ---will return an array of two cat objects
+    // ---return an array of 2 names (map)
+    // ---return the value orangeKittyNames (e)
   },
 
   sortByAge() {

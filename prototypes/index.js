@@ -41,13 +41,19 @@ const kittyPrompts = {
     // ---return the value orangeKittyNames (e)
   },
 
-  sortByAge() {
+  sortByAge(kittyData) {
     // Sort the kitties by their age
 
-    /* CODE GOES HERE */
+    // kittyData.sort((b, a) => {
+    //   return b - a;
+    // });
 
     // Annotation:
     // Write your annotation here as a comment
+    // --pseudo:
+    // ---SORT by age in order of older to youngest
+    // ---arrayName.sort()
+    // ---(b - a (reverse order))
   },
 
   growUp() {

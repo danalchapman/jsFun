@@ -23,7 +23,7 @@ const {
 } = require("../prototypes/index");
 
 describe("PROTOTYPES", () => {
-  describe.only("Kitty Prompts", () => {
+  describe("Kitty Prompts", () => {
     it("orangeKittyNames", () => {
       const e = kittyPrompts.orangePetNames(kitties);
 
@@ -126,8 +126,8 @@ describe("PROTOTYPES", () => {
     })
   });
 
-  describe("Club Prompts", () => {
-    it.skip("membersBelongingToClubs", () => {
+  describe.only("Club Prompts", () => {
+    it("membersBelongingToClubs", () => {
       const e = clubPrompts.membersBelongingToClubs(clubs);
 
       expect(e).to.deep.equal({

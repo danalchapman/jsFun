@@ -44,19 +44,20 @@ const kittyPrompts = {
   sortByAge(kittyData) {
     // Sort the kitties by their age
 
-    // kittyData.sort((b, a) => {
-    //   return b - a;
-    // });
+    const ages = kittyData.sort((a, b) => {
+      return b.age - a.age;
+    });
+
+    return ages;
 
     // Annotation:
     // Write your annotation here as a comment
-    // --pseudo:
-    // ---SORT by age in order of older to youngest
-    // ---arrayName.sort()
-    // ---(b - a (reverse order))
+    // tried to .map but it wasn't quite what was needed to sort (or if it was it wasn't working for me!)
+    // .sort() was the perfect fit as you can sort numerically/alphabetically depending on the property 
+    //
   },
 
-  growUp() {
+  growUp(kittyData) {
     // Return an array of kitties who have all grown up by 2 years e.g.
     // [{
     //   name: 'Felicia',
@@ -70,7 +71,17 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    /* CODE GOES HERE */
+    // forEach?
+    // kitties.age += 2
+    const increasedAges = [];
+    const grownKitties = kittyData.forEach(cat => {
+      increasedAges.push(cat.age += 2);
+    });
+
+    return grownKitties;
+
+    // Annotation:
+
   }
 };
 

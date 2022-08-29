@@ -111,11 +111,15 @@ const clubPrompts = {
 
     const newList = clubs.reduce((newMemberObj, currentClub) => {
       currentClub.members.forEach(member => {
+        // if (!newMemberObj[member]) {
+        //   newMemberObj[member] = [currentClub.club];
+        // } else {
+        //   newMemberObj[member].push(currentClub.club);
+        // }
         if (!newMemberObj[member]) {
-          newMemberObj[member] = [currentClub.club];
-        } else {
-          newMemberObj[member].push(currentClub.club);
-        }
+          newMemberObj[member] = [];
+        } 
+        newMemberObj[member].push(currentClub.club);
       })
 
       return newMemberObj; //always return acc
@@ -159,10 +163,23 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    /* CODE GOES HERE */
+    const result = mods.map(module => {
+      const {mod, students, instructors} = module //destructuring
+      return {
+        mod,
+        studentsPerInstructor: students / instructors
+      };
+    });
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // we have one array of objects
+    // return an array of objects (that is the same length)
+    // where the MOD and STUDENTSPERINSTRUCTOR are the KEYs
+    // adding studentsPerInstructor which is 
+    // --key.students / key.instructors (result is a number)
+    // map(returns an array that is the same length)
   }
 };
 
@@ -193,10 +210,20 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    /* CODE GOES HERE */
+    const result = cakes.map(cake => {
+      return {
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock
+      }
+    })
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // return an array of objects
+    // that array is mutated but the same length
+    // includes flavor and inStock keys and their values
+    // .map?
   },
 
   onlyInStock() {
@@ -220,20 +247,36 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    /* CODE GOES HERE */
+    const result = cakes.filter(cake => {
+      return cake.inStock > 0;
+    })
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return an array of ONLY cakes that have an inStock > 0
+    // should equal an array with 4 elements
+    // filter
   },
 
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    /* CODE GOES HERE */
+    const result = cakes.reduce((acc, cake) => {
+      return acc + cake.inStock;
+    }, 0)
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // we want to return a SINGLE VALUE 
+    // reduce!!!!
+    // acc = totalCakes
+    // currentValue = current element in the array
+    // acc + cake -- 
   },
 
   allToppings() {
@@ -241,10 +284,23 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    /* CODE GOES HERE */
+    const result = cakes.reduce((acc, cake) => {
+      const toppings = []
+      if (!cake.toppings) {
+        toppings.push(cake.toppings)
+      }
+    }, [])
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return an array of unique toppings (no duplicates)
+    // toppings in an ARRAY inside of an OBJECT that is in an array
+    // .includes? and .reduce?
+    // cakes.reduce((acc, cake) => {
+      // return 
+    // })
   },
 
   groceryList() {
@@ -292,10 +348,16 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    /* CODE GOES HERE */
+    const result = classrooms.filter(classroom => {
+      return classroom.program === 'FE';
+    })
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // create a new array of just FE classrooms
+    // .filter === classroom.program === 'FE'
   },
 
   totalCapacities() {
@@ -306,16 +368,42 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    /* CODE GOES HERE */
+    const result = classrooms.reduce((acc, classroom) => {
+      if (classroom.program === 'FE') {
+        acc.feCapacity += classroom.capacity;
+      } else if (classroom.program === 'BE') {
+        acc.beCapacity += classroom.capacity;
+      }
+
+      return acc;
+    }, {
+      feCapacity: 0,
+      beCapacity: 0
+    });
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return an OBJECT 
+    // create key names feCapacity and beCapacity
+    // their values the total number for each program
+    // add all FE capacities & BE capacities then return new object
+    // .map? .reduce?
+    // if (program === FE) feCapacity += capacity
+    // if you set the initialValue to just an object it 
+    // returns feCapacity: NaN -- something missing? wrong?
+    // acc.feCapaticty = NaN
+    // created the object in the initialValue and set the values to 0 
+    // now they are numbers and can be added to classroom.capacity
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    /* CODE GOES HERE */
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
+
+    return result;
 
     // Annotation:
     // Write your annotation here as a comment
@@ -378,10 +466,17 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    /* CODE GOES HERE */
+    const result = weather.map(city => {
+      return (city.temperature.high + city.temperature.low) / 2;
+    })
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return a copy of the array 
+    // that array has the AVG of the high/low temps for each location
+    // .map
   },
 
   findSunnySpots() {
@@ -391,10 +486,28 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    /* CODE GOES HERE */
+    const result = weather.reduce((acc, city) => {
+      if (city.type.includes('sunny')) {
+        let print = `${city.location} is ${city.type}.`;
+        acc.push(print);
+      }
+
+      return acc;
+    }, []);
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return a new array
+    // if (conditional).includes 'sunny' in the weather.type
+    // console.log(`${weather.location} is ${weather.type}`)
+    // Object.keys()? since we're iterating over every location and type key?
+    // .map()?
+    // using .map gets me an array of ALL elements 
+    // .filter? and .map??
+    // try .reduce?
+    // OH yes all the .includes make more sense here because we are creating a new array and pushing that into the acc which is the starting value
   },
 
   findHighestHumidity() {
@@ -406,10 +519,16 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    /* CODE GOES HERE */
+    
+    const result = weather.sort((a, b) => b.humidity - a.humidity)
+
+    return result[0]
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return a single element of that array that matches the given test
+    // .sort to organize the elements by humidity
+    // return the first element (highest humidity)
 
   }
 };
@@ -496,10 +615,20 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    /* CODE GOES HERE */
+    const result = breweries.reduce((acc, brewery) => {
+      return acc + brewery.beers.length;
+    }, 0);
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // we are given an array of objects
+    // we want to return a single value (a number) REDUCE
+    // we are adding all the types of beers together
+    // acc = totalBreweries
+    // element = brewery (iterating over every single brewery in the array)
+    // brewery.beers = an array = .length? is a number
+    // acc + brewery.beers.length?
   },
 
   getBreweryBeerCount() {
@@ -511,10 +640,21 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    /* CODE GOES HERE */
+    const result = breweries.map(brewery => {
+      return {
+        name: brewery.name,
+        beerCount: brewery.beers.length
+      }
+    })
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return an array of objects that has the name of the brewery & the number of beers it has
+    // .map as we are returning an array of the same length but mutating it?
+    // name: brewery.name,
+    // beerCount: brewery.beers.length
   },
 
   findHighestAbvBeer() {
@@ -522,10 +662,19 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    /* CODE GOES HERE */
+    const allBeers = breweries.map(brewery => {
+      return brewery.beers
+    }).flat() // removes one layer of the array to concat all array inside into a single array
 
+    allBeers.sort((a, b) => b.abv - a.abv)
+
+    return allBeers[0]
+
+    console.log(allBeers)
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // returning a single object 
+    // looking for highest abv
   }
 };
 

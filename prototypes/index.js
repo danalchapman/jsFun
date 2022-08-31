@@ -551,10 +551,30 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    /* CODE GOES HERE */
+    const result = nationalParks.reduce((acc, park) => {
+      if (park.visited) {
+        acc.parksVisited.push(park.name);
+      } else {
+        acc.parksToVisit.push(park.name);
+      }
+
+      return acc;
+    }, {
+      parksToVisit: [],
+      parksVisited: []
+    })
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects 
+    // return an object that has parksToVisit and parksVisited as keys
+    // if (!park.visited) {
+      // acc.parksVisted.push(park.name)
+      // else {
+        // acc.parksToVisit.push(park.name)
+      //}
+      // reduce
   },
 
   getParkInEachState() {
@@ -566,11 +586,19 @@ const nationalParksPrompts = {
     // { Utah: 'Zion' },
     // { Florida: 'Everglades' } ]
 
+    const result = nationalParks.map(park => {
+      return {
+        [park.location]: park.name,
+      }
+    })
 
-    /* CODE GOES HERE */
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return an array of objects with the key as the state and the value is the park name
+    // map
+    // [park.location] EVALUATES to a string for the key name, followed by the value of dot notation 
   },
 
   getParkActivities() {
@@ -589,10 +617,12 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    /* CODE GOES HERE */
-
+    
+    
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects
+    // return a new array of activities but exclude duplicates
+    // reduce?
   }
 };
 

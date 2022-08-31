@@ -165,7 +165,7 @@ describe("PROTOTYPES", () => {
     })
   });
 
-  describe("Cake Prompts", () => {
+  describe.only("Cake Prompts", () => {
     it("stockPerCake", () => {
       const e = cakePrompts.stockPerCake();
 
@@ -226,7 +226,7 @@ describe("PROTOTYPES", () => {
       expect(e).to.deep.equal(59)
     });
 
-    it.skip("allToppings", () => {
+    it("allToppings", () => {
       const e = cakePrompts.allToppings();
 
       expect(e).to.deep.equal(["dutch process cocoa", "toasted sugar", "smoked sea salt", "berries", "edible flowers", "mint", "cranberry", "crystallized ginger"])
@@ -378,7 +378,7 @@ describe("PROTOTYPES", () => {
       })
   });
 
-  describe.only("National Park Prompts", () => {
+  describe("National Park Prompts", () => {
     it("getParkVisitList", () => {
       const e = nationalParksPrompts.getParkVisitList();
 
@@ -387,7 +387,7 @@ describe("PROTOTYPES", () => {
         parksVisited: ['Rocky Mountain', 'Acadia', 'Zion']
       })
     }),
-      it.skip("getParkActivities", () => {
+      it("getParkActivities", () => {
         const e = nationalParksPrompts.getParkActivities();
 
         expect(e).to.deep.equal(

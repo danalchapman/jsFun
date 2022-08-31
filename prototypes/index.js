@@ -285,22 +285,22 @@ const cakePrompts = {
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
     const result = cakes.reduce((acc, cake) => {
-      const toppings = []
-      if (!cake.toppings) {
-        toppings.push(cake.toppings)
-      }
+      cake.toppings.forEach(topping => {
+        if (!acc.includes(topping)) {
+          acc.push(topping)
+        }
+      })
+
+      return acc;
     }, [])
 
     return result;
 
     // Annotation:
     // given an array of objects
-    // return an array of unique toppings (no duplicates)
-    // toppings in an ARRAY inside of an OBJECT that is in an array
-    // .includes? and .reduce?
-    // cakes.reduce((acc, cake) => {
-      // return 
-    // })
+    // return a new array of the elements of the toppings array
+    // no duplicates
+    // reduce + forEach
   },
 
   groceryList() {
@@ -617,12 +617,24 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    
+    const result = nationalParks.reduce((acc, currentPark) => {
+      currentPark.activities.forEach(activity => {
+        if (!acc.includes(activity)) {
+          acc.push(activity)
+        }
+      })
+
+      return acc;
+    }, [])
+
+    return result;
     
     // Annotation:
     // given an array of objects
-    // return a new array of activities but exclude duplicates
-    // reduce?
+    // return a new array, neither the OG length or a subset
+    // reduce
+    // we want an array where the elements are the elements of the park.activities array
+    // no duplicates
   }
 };
 

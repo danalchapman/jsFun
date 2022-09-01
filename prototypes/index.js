@@ -314,10 +314,30 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    /* CODE GOES HERE */
+    const result = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach(topping => {
+        if (!acc[topping]) {
+          acc[topping] = 1
+        } else {
+          acc[topping] += 1
+        }
+      })
+
+      return acc
+    }, {})
+
+    return result
 
     // Annotation:
-    // Write your annotation here as a comment
+    // ok ok ok 
+    // given an array of objects
+    // we want an OBJECT
+    // where the keys are each topping and the value is the amount we need
+    // given an array -> return an object -> the value is NOT an exact element in the array
+    // this means reduce
+    // iterate over each cake AND each topping
+    // if it doesn't have the key make it and assign
+    // if it does add 1 to the value of topping-key
   }
 };
 
@@ -433,7 +453,10 @@ const bookPrompts = {
     /* CODE GOES HERE */
 
     // Annotation:
-    // Write your annotation here as a comment
+    // must pass in a parameter as the test is taking in an argument of books
+    // given an array of objects
+    // return an array of books.title =/= horror/true crime (books.genre)
+    // return an array that is a subset of the OG array = .filter?
 
   },
   getNewBooks() {

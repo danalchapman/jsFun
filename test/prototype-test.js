@@ -165,7 +165,7 @@ describe("PROTOTYPES", () => {
     })
   });
 
-  describe.only("Cake Prompts", () => {
+  describe("Cake Prompts", () => {
     it("stockPerCake", () => {
       const e = cakePrompts.stockPerCake();
 
@@ -232,7 +232,7 @@ describe("PROTOTYPES", () => {
       expect(e).to.deep.equal(["dutch process cocoa", "toasted sugar", "smoked sea salt", "berries", "edible flowers", "mint", "cranberry", "crystallized ginger"])
     });
 
-    it.skip("groceryList", () => {
+    it("groceryList", () => {
       const e = cakePrompts.groceryList();
 
       expect(e).to.deep.equal({
@@ -319,7 +319,7 @@ describe("PROTOTYPES", () => {
     })
   });
 
-  describe("Book prompts", () => {
+  describe.only("Book prompts", () => {
     it.skip("removeViolence", () => {
       const e = bookPrompts.removeViolence(books);
 

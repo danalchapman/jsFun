@@ -745,11 +745,19 @@ const breweryPrompts = {
     // brewery has e.g.
     // given 'Ratio Beerworks', return 5
 
+    const result = breweries.reduce((acc, brewery) => {
+      if (breweryName === brewery.name) {
+        acc = brewery.beers.length;
+      }
 
-    /* CODE GOES HERE */
+      return acc;
+    }, 0)
+
+    return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array --> return a number (reduce)
+    // brewery: totalBeers (elements in the array/ .length)
   },
 
   findHighestAbvBeer() {

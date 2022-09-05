@@ -441,7 +441,7 @@ const classPrompts = {
 // DATASET: books from './datasets/books
 
 const bookPrompts = {
-  removeViolence() {
+  removeViolence(books) {
     // Your function should access the books data through a parameter (it is being passed as an argument in the test file)
     // return an array of all book titles that are not horror or true crime. Eg:
 
@@ -452,16 +452,26 @@ const bookPrompts = {
     //   'Catch-22', 'Treasure Island']
 
 
-    /* CODE GOES HERE */
+    const result = books.reduce((acc, book) => {
+      if (book.genre !== "Horror" && book.genre !== "True Crime") {
+        acc.push(book.title)
+      }
+
+      return acc;
+    }, [])
+
+    return result;
 
     // Annotation:
     // must pass in a parameter as the test is taking in an argument of books
     // given an array of objects
     // return an array of books.title =/= horror/true crime (books.genre)
     // return an array that is a subset of the OG array = .filter?
+    // move to reduce bc array data type given =/= array data type expected
+    // acc is the initialValue []
 
   },
-  getNewBooks() {
+  getNewBooks(books) {
     // return an array of objects containing all books that were
     // published in the 90's and 00's. Inlucde the title and the year Eg:
 
@@ -469,10 +479,26 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    /* CODE GOES HERE */
+    const result = books.reduce((accArray, currentBook) => {
+      if (currentBook.published >= 1990) {
+        currentBook = {
+          title: currentBook.title,
+          year: currentBook.published
+        }
+
+        accArray.push(currentBook)
+      }
+
+      return accArray
+    }, [])
+
+    return result
 
     // Annotation:
-    // Write your annotation here as a comment
+    // given an array of objects --> return an array of objects --> not the same length --> 
+    // object contains TITLE and YEAR keys and their values corresponding
+    // if published includes 90s and 00s
+    // 
   },
 
   getBooksByYear(books, year) {
@@ -485,7 +511,20 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    /* CODE GOES HERE */
+    const result = books.reduce((accArray, currentBook) => {
+      if (currentBook.published >= year) {
+        currentBook = {
+          title: currentBook.title,
+          year: currentBook.published
+        }
+
+        accArray.push(currentBook)
+      }
+
+      return accArray
+    }, [])
+
+    return result
 
     // Annotation:
     // Write your annotation here as a comment
@@ -889,10 +928,21 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    /* CODE GOES HERE */
+    const result = instructors.map(instructor => {
+      return {
+        name: instructor.name,
+        studentCount: cohorts.find(cohort => cohort.module === instructor.module).studentCount
+      }
+    })
+
+    return result
 
     // Annotation:
-    // Write your annotation here as a comment
+    // double data sets hoo boy
+    // given two arrays - instructors & cohorts
+    // return an array of objects (same length as the instructors array)
+    // with NAME and STUDENTCOUNT as keys
+    // and the corresponding values as their values
   },
 
   studentsPerInstructor() {
